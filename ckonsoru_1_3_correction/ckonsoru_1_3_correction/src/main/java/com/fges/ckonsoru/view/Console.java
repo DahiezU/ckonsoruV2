@@ -42,6 +42,9 @@ public class Console {
         AfficherAnnulationAction action5 = 
             new AfficherAnnulationAction(8, "Liste des annulations", rdvDAO);
         actionsParNumero.put(5,action5);
+        AfficheListeAttenteAction action6 = 
+            new AfficheListeAttenteAction(7, "Liste d'attente", attenteDAO);
+        actionsParNumero.put(6,action6);
     }
     
     public void afficheMenu(){

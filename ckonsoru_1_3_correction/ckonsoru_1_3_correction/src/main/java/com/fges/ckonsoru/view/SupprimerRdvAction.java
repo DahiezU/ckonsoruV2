@@ -10,6 +10,7 @@ import com.fges.ckonsoru.dao.RendezVousDAO;
 import com.fges.ckonsoru.model.RendezVous;
 
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Scanner;
@@ -43,9 +44,10 @@ public class SupprimerRdvAction
         RendezVous delRdv = new RendezVous(client,debut,"");
         this.rdvDao.supprimerRendezVous(delRdv);
         System.out.println("Un rendez-vous pour "+client+" le  "+ timeFormatter.format(debut) + " a été supprimé");
+      
+        this.attenteDao.RechercheClientLA(debut);
+        System.out.println("L'annulation a été tracée \n" + "Un client en liste d'attente sera rappelé.");
 
-        LocalDate Redebut = LocalDate.parse(sDebut, timeFormatter);
-        this.attenteDao.RechercheClientLA(Redebut);
     }
     
 }

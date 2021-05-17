@@ -7,6 +7,7 @@ package com.fges.ckonsoru.model;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 /**
  *
@@ -23,12 +24,12 @@ public class ListeAttente {
     protected LocalDateTime ladateDemande;
 
     public ListeAttente(int id ,  String nomClient,  String numTel, LocalDate dateAuPlusTard, LocalDateTime creneauPropose, LocalDateTime la_dateDemande, String nomVeto){
-        this.id      = id;
-        this.nomClient      = nomClient;
-        this.numTel      = numTel;
-        this.dateAuPlusTard           = dateAuPlusTard;
-        this.ladateDemande           = la_dateDemande;
-        this.creneauPropose           = creneauPropose;
+        this.id = id;
+        this.nomClient = nomClient;
+        this.numTel = numTel;
+        this.dateAuPlusTard  = dateAuPlusTard;
+        this.ladateDemande = la_dateDemande;
+        this.creneauPropose = creneauPropose;
         this.nomVeto = nomVeto;
     }
 
@@ -80,6 +81,21 @@ public class ListeAttente {
 
     public void setNomVeto(String nomVeto) {
         this.nomVeto = nomVeto;
+    }
+
+
+    @Override
+    public String toString() {
+        
+		
+        if(this.creneauPropose != null){
+            DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+           
+            return String.format(this.nomClient +", " + timeFormatter.format(this.creneauPropose)+ " ," + this.nomVeto);
+        }else{
+            return String.format(this.nomClient +", - ");
+        }
+        
     }
     
 }
