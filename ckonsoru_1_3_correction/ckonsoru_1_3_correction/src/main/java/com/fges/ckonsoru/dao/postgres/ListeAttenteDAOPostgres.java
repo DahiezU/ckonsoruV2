@@ -34,44 +34,38 @@ public class ListeAttenteDAOPostgres
 
     }
 
-
-    
+   
     public void MiseAJourListeAttente(LocalDate creneau , int id) throws SQLException{
-            /*PreparedStatement stUpdateListe = this.postgresConnexion.conn.prepareStatement(
-                "BEGIN; \n"
-                +"UPDATE listeAttente \n"
-                    +"SET la_creneauPropose = '2021-03-18 16:00:00'\n"
-                +"WHERE la_id = 1\n"
-                +"SELECT * FROM listeAttente;\n"
-                +"ROLLBACK;\n"
+            PreparedStatement stUpdateListe = this.postgresConnexion.conn.prepareStatement(
+                "UPDATE listeAttente \n"
+                    +"SET la_creneauPropose = ? \n"
+                +"WHERE la_id = ? ;\n"
                 );
-                stUpdateListe.setDate(1,creneau);
+                stUpdateListe.setDate(1,java.sql.Date.valueOf(creneau));
                 stUpdateListe.setInt(2,id);
-                stUpdateListe.executeUpdate();*/
+                stUpdateListe.executeUpdate();
     }
 
     public void RechercheClientLA(LocalDate datePlusTard) throws SQLException{
-        /*PreparedStatement stRechercheListe = this.postgresConnexion.conn.prepareStatement(
+        PreparedStatement stRechercheListe = this.postgresConnexion.conn.prepareStatement(
             "SELECT la_id, la_client, la_numTel, la_dateAuPlusTard,\n"
             +"la_dateDemande, la_creneauPropose \n"
             +"FROM listeAttente \n"
-            +"WHERE '2021-05-08'::date <= la_dateAuPlusTard \n"
+            +"WHERE ? ::date <= la_dateAuPlusTard \n"
             +"AND la_creneauPropose IS NULL \n"
             +"ORDER BY la_dateDemande ASC \n"
             +"LIMIT 1"
         );
-        stRechercheListe.setDate(1,datePlusTard);
+        stRechercheListe.setDate(1,java.sql.Date.valueOf(datePlusTard));
         ResultSet rs  = stRechercheListe.executeQuery();
-        while (rs.next()){
-            int id = rs.getInt("la_id");
-            String client = rs.getString("la_client");
-            String num = rs.getString("la_numTel");
-            LocalDate daterPlusTard = rs.getDate("la_dateAuPlusTard").toLocalDate();
-        }
-
-        if(rs != null){
-
-        }*/
+            while (rs.next()){
+                int id = rs.getInt("la_id");
+                String client = rs.getString("la_client");
+                String num = rs.getString("la_numTel");
+                LocalDate maDatePlusTard = rs.getDate("la_dateAuPlusTard").toLocalDate();
+                System.out.println(" mon id : " +id +  "mon client : "  + client+ "maDatePlsuTard"  +  maDatePlusTard +  "mon num : "+num ) ;
+                MiseAJourListeAttente(maDatePlusTard , id);
+            }
         
     }
 

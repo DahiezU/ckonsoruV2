@@ -37,7 +37,7 @@ public class Console {
             new PrendreRdvAction(3, "Prendre un rendez-vous",rdvDAO);
         actionsParNumero.put(3,action3);
         SupprimerRdvAction action4 =
-            new SupprimerRdvAction(4, "Supprimer un rendez-vous",rdvDAO);
+            new SupprimerRdvAction(4, "Supprimer un rendez-vous",rdvDAO , attenteDAO);
         actionsParNumero.put(4, action4);  
         AfficherAnnulationAction action5 = 
             new AfficherAnnulationAction(8, "Liste des annulations", rdvDAO);
