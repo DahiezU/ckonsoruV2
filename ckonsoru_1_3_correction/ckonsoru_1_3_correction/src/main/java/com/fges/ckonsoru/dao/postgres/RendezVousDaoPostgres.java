@@ -5,11 +5,11 @@
  */
 package com.fges.ckonsoru.dao.postgres;
 
+import com.fges.ckonsoru.dao.ListeAnnulationDAO;
 import com.fges.ckonsoru.dao.RendezVousDAO;
 import com.fges.ckonsoru.model.Annulation;
 import com.fges.ckonsoru.model.RendezVous;
 
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -18,7 +18,7 @@ import java.sql.Timestamp;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,7 +28,7 @@ import java.util.List;
  */
 public class RendezVousDaoPostgres 
     extends DaoPostgres
-    implements RendezVousDAO {
+    implements RendezVousDAO  {
 
     public RendezVousDaoPostgres(PostgresConnexion postgresConnexion) {
         super(postgresConnexion);
@@ -58,40 +58,9 @@ public class RendezVousDaoPostgres
         try {
 
             if( Duration.between(rendezVous.getDate(), LocalDateTime.now()).getSeconds() <= 86400){
-
-                Duration maDuration = Duration.between(rendezVous.getDate(), LocalDateTime.now());
-                
-                Timestamp timeHeure = new Timestamp(maDuration.getSeconds());
-               
-
-
-                PreparedStatement stVet = this.postgresConnexion.conn.prepareStatement(
-                        "SELECT vet_id FROM rendezvous \n" +
-                        "WHERE rv_client = ? \n" +
-                        "AND rv_debut = ? ;"
-                    
-                );
-
-                int id = 0 ;
-                stVet.setObject(1, rendezVous.getNomClient());
-                stVet.setObject(2, rendezVous.getDate());
-                ResultSet rs = stVet.executeQuery();
-                while (rs.next()){
-                    id = rs.getInt("vet_id");
-                   
-                }
-                rs.close();
-                stVet.close();
-                
-                PreparedStatement sth24 = this.postgresConnexion.conn.prepareStatement(   
-                    "INSERT INTO annulation (ann_client, ann_creneau, vet_id, ann_delai) \n"
-                    +"VALUES ( ? ,  ? , ? , ? );"
-                );
-                sth24.setObject(1,rendezVous.getNomClient());
-                sth24.setObject(2, rendezVous.getDate());
-                sth24.setInt(3,id);
-                sth24.setTimestamp(4 , timeHeure);
-                sth24.executeUpdate();
+                System.out.println("éeeeeeeeeeeeeeeeeeeeeeeeee");
+                ListeAnnulationDAOPostgres a = new ListeAnnulationDAOPostgres(postgresConnexion);
+                a.ajouterAnnulation(rendezVous);
             }
 
             PreparedStatement st = this.postgresConnexion.conn.prepareStatement(
@@ -201,4 +170,8 @@ public class RendezVousDaoPostgres
             return maListAnnulation;
         
     }
+
+    
+
+  
 }
