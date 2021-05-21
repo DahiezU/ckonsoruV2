@@ -34,9 +34,7 @@ implements ListeAnnulationDAO{
             );
 
             int id = 0 ;
-            /* System.out.println("mon nom de client " + rendezVous.getNomClient());
            
-            System.out.println("ma date de rdv  " + rendezVous.getDate());*/
 
             stVet.setObject(1, rendezVous.getNomClient());
             //Timestamp timestamp = Timestamp.valueOf(rendezVous.getDate());

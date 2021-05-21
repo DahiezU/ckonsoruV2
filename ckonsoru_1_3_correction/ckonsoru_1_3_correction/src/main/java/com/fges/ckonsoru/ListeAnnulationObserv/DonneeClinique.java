@@ -1,11 +1,14 @@
-package com.fges.ckonsoru;
+package com.fges.ckonsoru.ListeAnnulationObserv;
+
+
+
 
 import com.fges.ckonsoru.model.RendezVous;
 
 public class DonneeClinique {
     protected RendezVous rendezVousSupprimer;
-
     
+
     public void setrendezVousSupprimer(RendezVous rdv){
         this.rendezVousSupprimer = rdv;
     }
@@ -13,4 +16,6 @@ public class DonneeClinique {
     public RendezVous getrendezVousSupprimer(){
         return rendezVousSupprimer;
     }
+
+
 }

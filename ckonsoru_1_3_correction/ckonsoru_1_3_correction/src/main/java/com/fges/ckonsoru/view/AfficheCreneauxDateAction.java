@@ -5,6 +5,9 @@
  */
 package com.fges.ckonsoru.view;
 
+import com.fges.ckonsoru.ListeAnnulationObserv.DonneeClinique;
+import com.fges.ckonsoru.ListeAttenteObserv.DonneCliniqueListeAttenteObservableImpl;
+import com.fges.ckonsoru.ListeAttenteObserv.DonneeCliniqueListeAttente;
 import com.fges.ckonsoru.dao.DisponibilitesDAO;
 import com.fges.ckonsoru.dao.ListeAttenteDao;
 import com.fges.ckonsoru.model.Disponibilite;
@@ -29,13 +32,15 @@ public class AfficheCreneauxDateAction
     
     protected DisponibilitesDAO dispoDAO;
     protected ListeAttenteDao listeAttenteDAO;
+    protected DonneCliniqueListeAttenteObservableImpl listeAttenteObservable;
 
     public AfficheCreneauxDateAction(int numero, String description, 
-                                     DisponibilitesDAO dispoDAO , ListeAttenteDao listeAttDAO) {
+                                     DisponibilitesDAO dispoDAO , ListeAttenteDao listeAttDAO , DonneCliniqueListeAttenteObservableImpl listeAttenteObservable) {
         super(numero, description);
         this.dispoDAO = dispoDAO;
         this.listeAttenteDAO = listeAttDAO;
-    }
+        this.listeAttenteObservable = listeAttenteObservable ;
+     }
 
     @Override
     public void executer(Scanner scanner) throws SQLException {
@@ -54,7 +59,17 @@ public class AfficheCreneauxDateAction
                 String sNom= scanner.nextLine();
                 System.out.println("Indiquez un numéro auquel on pourra vous rappeler (ex: +33612345678)");
                 String sNum = scanner.nextLine();
-                this.listeAttenteDAO.InscriptionListeAttente(sNom, date , sNum);
+                
+                DonneeCliniqueListeAttente resultat = new DonneeCliniqueListeAttente();
+                resultat.setNomLA(sNom);
+                resultat.setNumTelLA(sNum);
+                resultat.setdate(date);
+
+                this.listeAttenteObservable.notifierObservateurs(sNom,sNum,date);
+                
+    
+                //this.listeAttenteDAO.InscriptionListeAttente(sNom, date , sNum);
+
            }
             
         }else{  

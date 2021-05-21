@@ -1,4 +1,4 @@
-package com.fges.ckonsoru;
+package com.fges.ckonsoru.ListeAnnulationObserv;
 
 
 import com.fges.ckonsoru.model.RendezVous;

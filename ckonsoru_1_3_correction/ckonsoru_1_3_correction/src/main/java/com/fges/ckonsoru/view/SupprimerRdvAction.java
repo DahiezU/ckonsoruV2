@@ -5,8 +5,10 @@
  */
 package com.fges.ckonsoru.view;
 
-import com.fges.ckonsoru.DonneeClinique;
-import com.fges.ckonsoru.DonneeCliniqueObservableImpl;
+import com.fges.ckonsoru.ListeAnnulationObserv.DonneeClinique;
+import com.fges.ckonsoru.ListeAnnulationObserv.DonneeCliniqueObservableImpl;
+import com.fges.ckonsoru.ListeAttenteObserv.DonneCliniqueListeAttenteObservableImpl;
+import com.fges.ckonsoru.ListeAttenteObserv.DonneeCliniqueListeAttente;
 import com.fges.ckonsoru.dao.ListeAttenteDao;
 import com.fges.ckonsoru.dao.RendezVousDAO;
 import com.fges.ckonsoru.model.RendezVous;
@@ -29,12 +31,14 @@ public class SupprimerRdvAction
     protected ListeAttenteDao attenteDao;
     protected DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
     protected DonneeCliniqueObservableImpl observable ;
+    protected DonneCliniqueListeAttenteObservableImpl LAobservable;
     
-    public SupprimerRdvAction(int numero, String description, RendezVousDAO rdvDao , ListeAttenteDao attenteDao, DonneeCliniqueObservableImpl observable) {
+    public SupprimerRdvAction(int numero, String description, RendezVousDAO rdvDao , ListeAttenteDao attenteDao, DonneeCliniqueObservableImpl observable, DonneCliniqueListeAttenteObservableImpl LAobservable ) {
         super(numero, description);
         this.rdvDao = rdvDao; 
         this.attenteDao = attenteDao;
         this.observable = observable;
+        this.LAobservable = LAobservable;
     }
 
     @Override
@@ -46,10 +50,16 @@ public class SupprimerRdvAction
         System.out.println("Indiquer le nom du client");
         String client = scanner.nextLine();
         RendezVous delRdv = new RendezVous(client,debut,"");
-        this.rdvDao.supprimerRendezVous(delRdv);
+       
         System.out.println("Un rendez-vous pour "+client+" le  "+ timeFormatter.format(debut) + " a été supprimé");
         
-        this.attenteDao.RechercheClientLA(debut);
+
+        DonneeCliniqueListeAttente resultatLa = new DonneeCliniqueListeAttente();
+        resultatLa.setdatePlusTard(debut);
+        this.LAobservable.notifierUpdateObservateurs(debut);
+        //this.attenteDao.RechercheClientLA(debut);
+
+        
         System.out.println("L'annulation a été tracée \n" + "Un client en liste d'attente sera rappelé.");
 
         
@@ -57,6 +67,12 @@ public class SupprimerRdvAction
         DonneeClinique resultat = new DonneeClinique();
         resultat.setrendezVousSupprimer(delRdv);
         this.observable.notifierObservateurs(delRdv);
+
+        
+       
+        this.rdvDao.supprimerRendezVous(delRdv);
+
+        //resultat.setlisteAttente(la);
 
         
 

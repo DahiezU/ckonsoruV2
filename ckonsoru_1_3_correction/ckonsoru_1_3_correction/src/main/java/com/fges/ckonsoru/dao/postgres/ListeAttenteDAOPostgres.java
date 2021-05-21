@@ -38,14 +38,16 @@ public class ListeAttenteDAOPostgres
    
     public void MiseAJourListeAttente(LocalDateTime datePlusTard , int id) throws SQLException{
             PreparedStatement stUpdateListe = this.postgresConnexion.conn.prepareStatement(
-                "UPDATE listeAttente \n"
-                    +"SET la_creneauPropose = ? \n"
-                +"WHERE la_id = ? ;\n"
-                );
+                "UPDATE listeAttente SET la_creneauPropose = ? WHERE la_id = ? ;");
+
                 Timestamp timestamp = Timestamp.valueOf(datePlusTard);
+                System.out.println("11111111111");
                 stUpdateListe.setTimestamp(1,timestamp);
-                stUpdateListe.setInt(2,id);
+                System.out.println("222222222222222");
+                stUpdateListe.setInt(2, id);
+                System.out.println("3333333333333333333");
                 stUpdateListe.executeUpdate();
+                System.out.println(" je passe dans MiseAJourListeAttente");
     }
 
     public void RechercheClientLA(LocalDateTime datePlusTard) throws SQLException{
@@ -66,9 +68,10 @@ public class ListeAttenteDAOPostgres
                 String client = rs.getString("la_client");
                 String num = rs.getString("la_numTel");
                 LocalDate maDatePlusTard = rs.getDate("la_dateAuPlusTard").toLocalDate();
-                System.out.println(" mon id : " +id +  "mon client : "  + client+ "maDatePlsuTard"  +  maDatePlusTard +  "mon num : "+num ) ;
+                System.out.println(" mon id : " +id +  " ,mon client : "  + client+ "  ,maDatePlsuTard "  +  maDatePlusTard +  " ,mon num : "+num ) ;
                 MiseAJourListeAttente(datePlusTard , id);
             }
+            System.out.println(" je passe dans RechercheClientLA");
         
     }
 

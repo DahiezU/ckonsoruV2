@@ -5,6 +5,10 @@
  */
 package com.fges.ckonsoru;
 
+import com.fges.ckonsoru.ListeAnnulationObserv.DonneeCliniqueObservableImpl;
+import com.fges.ckonsoru.ListeAnnulationObserv.trackerAnnulation;
+import com.fges.ckonsoru.ListeAttenteObserv.DonneCliniqueListeAttenteObservableImpl;
+import com.fges.ckonsoru.ListeAttenteObserv.trackerListeAttente;
 import com.fges.ckonsoru.dao.DisponibilitesDAO;
 import com.fges.ckonsoru.dao.ListeAnnulationDAO;
 import com.fges.ckonsoru.dao.ListeAttenteDao;
@@ -50,7 +54,7 @@ public class App {
         ListeAttenteDao  attenteDAO = null;
         ListeAnnulationDAO annulationDao = null;
         DonneeCliniqueObservableImpl observable = null;
-       
+        DonneCliniqueListeAttenteObservableImpl attenteObservable = null;
 
 
        
@@ -64,10 +68,17 @@ public class App {
                 rdvDAO = new RendezVousDaoPostgres(pgConn);
                 attenteDAO = new ListeAttenteDAOPostgres(pgConn);
                 annulationDao = new ListeAnnulationDAOPostgres(pgConn);
-                 // Enregistrement trackers
+                 
+                
+                // Enregistrement trackers
                 observable = new DonneeCliniqueObservableImpl();
                 trackerAnnulation trackerAnn = new trackerAnnulation(annulationDao);
                 observable.enregistrerObservateur(trackerAnn);
+
+                attenteObservable = new DonneCliniqueListeAttenteObservableImpl();
+                trackerListeAttente trackerListettente = new  trackerListeAttente(attenteDAO);
+                attenteObservable.enregistrerObservateur(trackerListettente);
+                
                 
             }catch(SQLException sqle){
                 System.err.println("Problème de connexion à la base de données " + sqle.getMessage());
@@ -83,7 +94,7 @@ public class App {
         }
          
         // lancement de la console
-        Console console = new Console(disponibilitesDAO, attenteDAO,rdvDAO ,observable );
+        Console console = new Console(disponibilitesDAO, attenteDAO,rdvDAO ,observable , attenteObservable );
         console.traiterAction();    
         
         // fermeture de l'appli
