@@ -34,12 +34,16 @@ implements ListeAnnulationDAO{
             );
 
             int id = 0 ;
+            System.out.println("mon nom de client " + rendezVous.getNomClient());
+            System.out.println("ma date   de rdv  " + rendezVous.getDate());
             stVet.setObject(1, rendezVous.getNomClient());
             stVet.setObject(2, rendezVous.getDate());
             ResultSet rs = stVet.executeQuery();
-            while (rs.next()){
+            /*id = rs.getInt("vet_id");
+            System.out.println("ma id de vet   " + id );*/
+            while(rs.next()){
                 id = rs.getInt("vet_id");
-                
+                System.out.println("ma id de vet   " + id );
             }
             rs.close();
             stVet.close();
@@ -53,6 +57,7 @@ implements ListeAnnulationDAO{
             sth24.setInt(3,id);
             sth24.setTimestamp(4 , timeHeure);
             sth24.executeUpdate();
+            sth24.close();
         
     }
     

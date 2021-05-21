@@ -56,12 +56,12 @@ public class RendezVousDaoPostgres
     @Override
     public void supprimerRendezVous(RendezVous rendezVous) {
         try {
-
-            if( Duration.between(rendezVous.getDate(), LocalDateTime.now()).getSeconds() <= 86400){
+            ///// appelle lorsqu'on observe rdv supprimer
+            /*if( Duration.between(rendezVous.getDate(), LocalDateTime.now()).getSeconds() <= 86400){
                 System.out.println("éeeeeeeeeeeeeeeeeeeeeeeeee");
                 ListeAnnulationDAOPostgres a = new ListeAnnulationDAOPostgres(postgresConnexion);
                 a.ajouterAnnulation(rendezVous);
-            }
+            }*/
 
             PreparedStatement st = this.postgresConnexion.conn.prepareStatement(
                 "DELETE FROM rendezvous \n" +

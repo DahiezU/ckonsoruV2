@@ -11,7 +11,7 @@ package com.fges.ckonsoru.dao.postgres;
  */
 public class DaoPostgres {
     
-    PostgresConnexion postgresConnexion;
+    protected PostgresConnexion postgresConnexion;
     
     public DaoPostgres(PostgresConnexion postgresConnexion){
         this.postgresConnexion = postgresConnexion;

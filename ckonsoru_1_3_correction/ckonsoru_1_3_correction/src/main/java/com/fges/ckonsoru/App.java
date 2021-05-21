@@ -6,9 +6,11 @@
 package com.fges.ckonsoru;
 
 import com.fges.ckonsoru.dao.DisponibilitesDAO;
+import com.fges.ckonsoru.dao.ListeAnnulationDAO;
 import com.fges.ckonsoru.dao.ListeAttenteDao;
 import com.fges.ckonsoru.dao.RendezVousDAO;
 import com.fges.ckonsoru.dao.postgres.DisponibilitesDaoPostgres;
+import com.fges.ckonsoru.dao.postgres.ListeAnnulationDAOPostgres;
 import com.fges.ckonsoru.dao.postgres.ListeAttenteDAOPostgres;
 import com.fges.ckonsoru.dao.postgres.PostgresConnexion;
 import com.fges.ckonsoru.dao.postgres.RendezVousDaoPostgres;
@@ -46,7 +48,14 @@ public class App {
         DisponibilitesDAO disponibilitesDAO=null;
         RendezVousDAO rdvDAO=null;
         ListeAttenteDao  attenteDAO = null;
-        
+        ListeAnnulationDAO annulationDao = null;
+        DonneeCliniqueObservableImpl observable = null;
+       
+
+
+       
+       
+
         // init DAO postgres
         if(properties.getProperty("persistence").compareTo(PERSISTENCE_BDD)==0){
             try{
@@ -54,6 +63,11 @@ public class App {
                 disponibilitesDAO = new DisponibilitesDaoPostgres(pgConn);
                 rdvDAO = new RendezVousDaoPostgres(pgConn);
                 attenteDAO = new ListeAttenteDAOPostgres(pgConn);
+                annulationDao = new ListeAnnulationDAOPostgres(pgConn);
+                 // Enregistrement trackers
+                observable = new DonneeCliniqueObservableImpl();
+                trackerAnnulation trackerAnn = new trackerAnnulation(annulationDao);
+                observable.enregistrerObservateur(trackerAnn);
                 
             }catch(SQLException sqle){
                 System.err.println("Problème de connexion à la base de données " + sqle.getMessage());
@@ -69,7 +83,7 @@ public class App {
         }
          
         // lancement de la console
-        Console console = new Console(disponibilitesDAO, attenteDAO,rdvDAO);
+        Console console = new Console(disponibilitesDAO, attenteDAO,rdvDAO ,observable );
         console.traiterAction();    
         
         // fermeture de l'appli
