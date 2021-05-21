@@ -26,25 +26,30 @@ implements ListeAnnulationDAO{
             Timestamp timeHeure = new Timestamp(maDuration.getSeconds());
         
             PreparedStatement stVet = this.postgresConnexion.conn.prepareStatement(
-                    "SELECT vet_id FROM rendezvous \n" +
-                    "WHERE rv_client = ? \n" +
-                    "AND rv_debut = ?;"
+                    "SELECT * FROM rendezvous \n" +
+                    "WHERE rv_client = ? ;"
+                   //"AND rv_debut = ? ;"
                   
                 
             );
 
             int id = 0 ;
-            System.out.println("mon nom de client " + rendezVous.getNomClient());
-            System.out.println("ma date   de rdv  " + rendezVous.getDate());
+            /* System.out.println("mon nom de client " + rendezVous.getNomClient());
+           
+            System.out.println("ma date de rdv  " + rendezVous.getDate());*/
+
             stVet.setObject(1, rendezVous.getNomClient());
+            //Timestamp timestamp = Timestamp.valueOf(rendezVous.getDate());
             stVet.setObject(2, rendezVous.getDate());
             ResultSet rs = stVet.executeQuery();
-            /*id = rs.getInt("vet_id");
-            System.out.println("ma id de vet   " + id );*/
-            while(rs.next()){
+            
+
+            if(rs.next()){
+               
                 id = rs.getInt("vet_id");
                 System.out.println("ma id de vet   " + id );
             }
+           
             rs.close();
             stVet.close();
             
@@ -52,6 +57,7 @@ implements ListeAnnulationDAO{
                 "INSERT INTO annulation (ann_client, ann_creneau, vet_id, ann_delai) \n"
                 +"VALUES ( ? ,  ? , ? , ? );"
             );
+
             sth24.setObject(1,rendezVous.getNomClient());
             sth24.setObject(2, rendezVous.getDate());
             sth24.setInt(3,id);
