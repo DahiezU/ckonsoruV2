@@ -22,7 +22,7 @@ public class trackerAnnulation  implements DonneeCliniqueObserver {
     public void actualiser(RendezVous rdv) {
         if( Duration.between(rdv.getDate(), LocalDateTime.now()).getSeconds() <= 86400){
             try {
-                System.out.println("qqqqqqqqqqqqqqqqqqqqqqqqq");
+          
                 this.AnnulationDao.ajouterAnnulation(rdv);
             } catch (SQLException e) {
                 
