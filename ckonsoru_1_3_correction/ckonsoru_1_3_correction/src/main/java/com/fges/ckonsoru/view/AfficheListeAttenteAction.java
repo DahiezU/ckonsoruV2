@@ -2,14 +2,13 @@ package com.fges.ckonsoru.view;
 
 
 import java.sql.SQLException;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+
 import java.util.List;
 import java.util.Scanner;
 
 import com.fges.ckonsoru.dao.ListeAttenteDao;
 import com.fges.ckonsoru.model.ListeAttente;
-import com.fges.ckonsoru.model.RendezVous;
+
 
 
 public class AfficheListeAttenteAction extends ActionConsole {
@@ -19,7 +18,7 @@ public class AfficheListeAttenteAction extends ActionConsole {
     public AfficheListeAttenteAction(int numero, String description , ListeAttenteDao LADao) {
         super(numero, description);
         this.LADao = LADao;
-        //TODO Auto-generated constructor stub
+       
     }
 
     @Override

@@ -32,7 +32,7 @@ public class trackerListeAttente implements DonneeCliniqueListeAttenteObserver{
             LADao.RechercheClientLA(datePlusTard);
            System.out.println(" je passe dans  updateLA ");
         } catch (SQLException e) {
-            // TODO Auto-generated catch block
+         
             e.printStackTrace();
         }
     }

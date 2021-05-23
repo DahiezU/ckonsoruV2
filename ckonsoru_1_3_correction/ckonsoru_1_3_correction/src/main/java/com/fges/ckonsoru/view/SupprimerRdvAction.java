@@ -14,8 +14,6 @@ import com.fges.ckonsoru.dao.RendezVousDAO;
 import com.fges.ckonsoru.model.RendezVous;
 
 import java.sql.SQLException;
-import java.sql.Timestamp;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Scanner;
 import java.time.format.DateTimeFormatter;

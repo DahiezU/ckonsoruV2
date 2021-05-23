@@ -5,7 +5,7 @@
  */
 package com.fges.ckonsoru.model;
 
-import java.time.Duration;
+
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;

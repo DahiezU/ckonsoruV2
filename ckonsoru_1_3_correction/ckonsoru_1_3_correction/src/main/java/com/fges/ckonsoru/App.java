@@ -21,12 +21,8 @@ import com.fges.ckonsoru.dao.postgres.RendezVousDaoPostgres;
 import com.fges.ckonsoru.dao.xml.DisponibilitesDaoXML;
 import com.fges.ckonsoru.dao.xml.RendezVousDaoXML;
 import com.fges.ckonsoru.dao.xml.XmlDatabaseFile;
-import com.fges.ckonsoru.model.Disponibilite;
 import com.fges.ckonsoru.view.Console;
 import java.sql.SQLException;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.List;
 import java.util.Properties;
 
 /**

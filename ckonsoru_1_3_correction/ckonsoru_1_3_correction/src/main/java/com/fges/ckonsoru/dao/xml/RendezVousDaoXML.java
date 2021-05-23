@@ -12,13 +12,10 @@ import com.fges.ckonsoru.model.RendezVous;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.LinkedList;
 import java.util.List;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.dom.DOMSource;
+
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpression;
@@ -76,7 +73,7 @@ public class RendezVousDaoXML
             NodeList nodes = (NodeList) expr.evaluate(this.xmlDbFile.xmldoc, XPathConstants.NODESET);
             for (int i = 0; i < nodes.getLength(); i++){
                 Node nNode = nodes.item(i);
-                // TODO https://stackoverflow.com/questions/33548591/java-xpath-remove-element-from-xml
+                
                 nNode.getParentNode().removeChild(nodes.item(i));
             }
             this.xmlDbFile.writeXml();
@@ -150,7 +147,7 @@ public class RendezVousDaoXML
 
     @Override
     public List<Annulation> ListeAnnulation() throws SQLException {
-        // TODO Auto-generated method stub
+   
         return null;
     } 
 }

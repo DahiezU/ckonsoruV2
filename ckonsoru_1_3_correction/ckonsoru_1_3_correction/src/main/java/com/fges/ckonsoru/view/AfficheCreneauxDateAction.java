@@ -5,7 +5,7 @@
  */
 package com.fges.ckonsoru.view;
 
-import com.fges.ckonsoru.ListeAnnulationObserv.DonneeClinique;
+
 import com.fges.ckonsoru.ListeAttenteObserv.DonneCliniqueListeAttenteObservableImpl;
 import com.fges.ckonsoru.ListeAttenteObserv.DonneeCliniqueListeAttente;
 import com.fges.ckonsoru.dao.DisponibilitesDAO;
@@ -16,7 +16,7 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
-import java.util.Locale;
+
 import java.util.Scanner;
 
 /**

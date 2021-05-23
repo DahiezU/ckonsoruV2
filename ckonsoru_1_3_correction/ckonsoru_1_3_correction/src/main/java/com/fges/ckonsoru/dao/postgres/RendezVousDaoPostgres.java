@@ -5,7 +5,7 @@
  */
 package com.fges.ckonsoru.dao.postgres;
 
-import com.fges.ckonsoru.dao.ListeAnnulationDAO;
+
 import com.fges.ckonsoru.dao.RendezVousDAO;
 import com.fges.ckonsoru.model.Annulation;
 import com.fges.ckonsoru.model.RendezVous;
@@ -15,7 +15,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Time;
 import java.sql.Timestamp;
-import java.time.Duration;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 

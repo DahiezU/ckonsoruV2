@@ -29,16 +29,14 @@ implements ListeAnnulationDAO{
                     "SELECT * FROM rendezvous \n" +
                     "WHERE rv_client = ? ;"
                    //"AND rv_debut = ? ;"
-                  
-                
+                    
             );
 
             int id = 0 ;
            
 
             stVet.setObject(1, rendezVous.getNomClient());
-            //Timestamp timestamp = Timestamp.valueOf(rendezVous.getDate());
-            stVet.setObject(2, rendezVous.getDate());
+        
             ResultSet rs = stVet.executeQuery();
             
 

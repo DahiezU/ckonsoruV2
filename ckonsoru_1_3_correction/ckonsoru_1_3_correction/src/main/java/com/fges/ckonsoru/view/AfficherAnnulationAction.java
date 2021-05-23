@@ -14,7 +14,7 @@ public class AfficherAnnulationAction  extends ActionConsole {
     public AfficherAnnulationAction(int numero, String description , RendezVousDAO rdvDao) {
         super(numero, description);
         this.rdvDao = rdvDao;
-        //TODO Auto-generated constructor stub
+        
     }
 
     @Override
@@ -24,7 +24,7 @@ public class AfficherAnnulationAction  extends ActionConsole {
         try {
             annulations = rdvDao.ListeAnnulation();
         } catch (SQLException e) {
-            // TODO Auto-generated catch block
+            
             e.printStackTrace();
         }
         for (Annulation annulation : annulations){

@@ -3,7 +3,6 @@ package com.fges.ckonsoru.dao.postgres;
 
 import com.fges.ckonsoru.dao.ListeAttenteDao;
 import com.fges.ckonsoru.model.ListeAttente;
-import com.fges.ckonsoru.model.RendezVous;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -76,12 +75,7 @@ public class ListeAttenteDAOPostgres
     }
 
 
-    /*@Override
-    public List<ListeAttente> AffichagerListeDAttente(LocalDate date) {
-        // TODO Auto-generated method stub
-        return null;
-    }*/
-
+ 
     //------------------------------------------------------------------------------------------------------------------------
   
     
